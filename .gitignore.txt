@@ -1,0 +1,37 @@
+# Node modules (never push these)
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# OS junk files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+
+# SQLite DB (optional — comment if you want to push a seed DB)
+streetwealth.db
+
+# Build artifacts (if any tools generate builds later)
+dist/
+build/
+
+# Render-specific (optional, but safe)
+.render/
+
+# Editor/IDE settings
+.vscode/
+.idea/
+
+# Frontend (if using frameworks like React/Vue)
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+
+# Lockfiles from other package managers (if you're only using npm)
+yarn.lock
+pnpm-lock.yaml
