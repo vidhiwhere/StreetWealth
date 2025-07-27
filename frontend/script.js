@@ -28,29 +28,30 @@ const LITERACY_MODULES = [
   {
     title: "How to Save Daily",
     desc: "Tips to help you save a little every day, so you're ready for rainy days and future investments.",
-    file: "save_daily.ppt" // Replace with your actual PPT file name
+    file: "How to Save Daily.pdf"
   },
   {
     title: "Understanding Interest",
     desc: "Learn how bank interest works—what's the difference between simple and compound interest?",
-    file: "understanding_interest.ppt" // Replace with your actual PPT file name
+    file: "Understanding Interest.pdf"
   },
   {
     title: "UPI Basics",
     desc: "A simple guide to cashless transactions using UPI and QR codes.",
-    file: "upi_basics.ppt" // Replace with your actual PPT file name
+    file: "UPI Basics.pdf"
   },
   {
     title: "Budgeting Your Business",
     desc: "Easy ways to plan your spending, increase earnings, and avoid unnecessary expenses.",
-    file: "budgeting_business.ppt" // Replace with your actual PPT file name
+    file: "Budgeting Your Business.pdf"
   },
   {
     title: "Documents for Loans",
     desc: "List of basic documents you need for loan applications.",
-    file: "documents_for_loans.ppt" // Replace with your actual PPT file name
+    file: "Documents for Loans.pdf"
   }
 ];
+
 // Page Navigation Logic
 function showPage(pageId) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
@@ -373,13 +374,12 @@ function renderModules() {
         <h4>${m.title}</h4>
         <p>${m.desc}</p>
       </div>
-      <a href="${m.file}" target="_blank" class="start-link" download>Download PPT</a>
+      <a href="${m.file}" target="_blank" class="start-link">Download PDF</a>
     `;
     grid.appendChild(card);
   });
 }
 renderModules();
-
 
 // Chatbot Logic
 const FAQS = [
