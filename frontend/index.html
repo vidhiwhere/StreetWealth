@@ -3,152 +3,220 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StreetWealth</title>
+  <title>StreetWealth — Empowering India's Street Vendors</title>
+  <meta name="description" content="StreetWealth is a financial management platform for street vendors. Track income, access micro-loans, and build financial literacy.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <script src="https://unpkg.com/tesseract.js@4.0.2/dist/tesseract.min.js"></script>
 </head>
 <body>
+
+  <!-- ── Navbar ── -->
   <header>
     <nav id="main-navbar" class="navbar">
-      <div class="navbar-brand logo-text">StreetWealth</div>
+      <div class="navbar-brand logo-text">⚡ StreetWealth</div>
       <ul class="navbar-links">
-        <li><a href="#" onclick="showPage('home')" class="nav-link active">Home</a></li>
-        <li><a href="#" onclick="showPage('ledger')" class="nav-link">Transactions</a></li>
-        <li><a href="#" onclick="showPage('loans')" class="nav-link">Loans</a></li>
-        <li><a href="#" onclick="showPage('learn')" class="nav-link">Learn</a></li>
+        <li><a href="#" onclick="showPage('home')"        class="nav-link active" id="nav-home">Home</a></li>
+        <li><a href="#" onclick="showPage('ledger')"      class="nav-link"        id="nav-ledger">Transactions</a></li>
+        <li><a href="#" onclick="showPage('loans')"       class="nav-link"        id="nav-loans">Loans</a></li>
+        <li><a href="#" onclick="showPage('learn')"       class="nav-link"        id="nav-learn">Learn</a></li>
       </ul>
       <div>
-        <button id="show-login-btn">Login</button>
-        <button id="logout-btn">Logout</button>
+        <button id="show-login-btn"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+        <button id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
       </div>
     </nav>
   </header>
 
+  <!-- ── Auth Modal ── -->
   <div id="auth-modal" class="modal">
     <div class="modal-content">
-      <span id="close-auth-modal" class="close">&times;</span>
-      <h2>Login or Create Account</h2>
+      <button id="close-auth-modal" class="close">&times;</button>
+      <h2>Welcome Back 👋</h2>
+
       <form id="login-form">
-        <input type="email" id="login-email" placeholder="Enter email" required>
-        <input type="password" id="login-password" placeholder="Enter password" required>
-        <button type="submit">Login</button>
+        <input type="email"    id="login-email"    placeholder="Email address" required>
+        <input type="password" id="login-password" placeholder="Password"      required>
+        <button type="submit">Login to StreetWealth</button>
       </form>
-      <p>Or register:</p>
+
+      <p>— or create an account —</p>
+
       <form id="signup-form">
-        <input type="text" id="signup-name" placeholder="Enter name" required>
-        <input type="email" id="signup-email" placeholder="Enter email" required>
-        <input type="password" id="signup-password" placeholder="Enter password" required>
-        <button type="submit">Sign Up</button>
+        <input type="text"     id="signup-name"     placeholder="Full name"     required>
+        <input type="email"    id="signup-email"    placeholder="Email address" required>
+        <input type="password" id="signup-password" placeholder="Password"      required>
+        <button type="submit">Create Account</button>
       </form>
+
       <div id="auth-message"></div>
     </div>
   </div>
 
+  <!-- ── Pages ── -->
   <main>
+
+    <!-- HOME -->
     <section id="home" class="page active">
-      <h1>StreetWealth - Empowering Street Vendors Financially</h1>
-      <p>StreetWealth is your digital partner for managing finances, accessing government-backed micro-loans, and learning essential money skills. Designed for street food vendors in India, StreetWealth simplifies transaction tracking, helps build a credit profile, and provides gamified learning for your financial growth.</p>
+      <h1>Smart Finance for<br>India's Street Heroes</h1>
+      <p>StreetWealth is your digital partner for managing finances, accessing government-backed micro-loans, and learning essential money skills — built specifically for street vendors across India.</p>
+
       <div class="features-grid">
         <div class="feature-card">
-          <i class="fas fa-book"></i>
+          <i class="fa-solid fa-book-open"></i>
           <h3>Digital Ledger</h3>
-          <p>Easily log income and expenses, see your balance, and track your business growth.</p>
+          <p>Log income and expenses, auto-track your balance and cashflow status in real time.</p>
         </div>
         <div class="feature-card">
-          <i class="fas fa-hand-holding-usd"></i>
+          <i class="fa-solid fa-hand-holding-dollar"></i>
           <h3>Micro-Loan Access</h3>
-          <p>Get info on government loan schemes and build credit for the future.</p>
+          <p>Explore government-backed schemes like PM SVANidhi, MUDRA Yojana, and more.</p>
         </div>
         <div class="feature-card">
-          <i class="fas fa-graduation-cap"></i>
+          <i class="fa-solid fa-graduation-cap"></i>
           <h3>Financial Skills</h3>
-          <p>Grow your skills with mobile-friendly, easy-to-understand learning modules!</p>
+          <p>Learn budgeting, saving, UPI usage and more through easy downloadable modules.</p>
         </div>
         <div class="feature-card">
-          <i class="fas fa-mobile-alt"></i>
-          <h3>UPI Integration (Mock)</h3>
-          <p>Track UPI payments and see your digital payment history.</p>
+          <i class="fa-solid fa-mobile-screen-button"></i>
+          <h3>Mock UPI Tracker</h3>
+          <p>Record and review your digital UPI payments and maintain a clean transaction history.</p>
         </div>
       </div>
     </section>
 
+    <!-- LEDGER + UPI -->
     <section id="ledger" class="page">
-      <h2>Digital Ledger</h2>
+      <div class="section-header">
+        <div class="section-icon">📒</div>
+        <h2>Digital Ledger</h2>
+      </div>
+
       <form id="ledger-form">
         <select id="type">
-          <option value="income">Income</option>
-          <option value="expense">Expense</option>
+          <option value="income">💚 Income</option>
+          <option value="expense">🔴 Expense</option>
         </select>
-        <input type="text" id="desc" placeholder="Description" required>
-        <input type="number" id="amount" placeholder="Amount" step="0.01" required>
-        <input type="date" id="date" required>
-        <button type="submit">Add Entry</button>
+        <input type="text"   id="desc"   placeholder="Description (e.g. Vada Pav sale)" required>
+        <input type="number" id="amount" placeholder="Amount (₹)"  step="0.01" required>
+        <input type="date"   id="date"   required>
+        <button type="submit"><i class="fa-solid fa-plus"></i> Add Entry</button>
       </form>
-      <div>
-        <h3>Scan a Receipt or Bill</h3>
-        <input type="file" id="receipt-image-input" accept="image/*">
-        <button id="scan-receipt-btn">Scan Receipt</button>
+
+      <!-- Scanner -->
+      <div class="scanner-section">
+        <h3><i class="fa-solid fa-camera"></i> Scan a Receipt or Bill</h3>
+        <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+          <label for="receipt-image-input" class="file-label">
+            <i class="fa-solid fa-upload"></i> Choose Image
+          </label>
+          <input type="file" id="receipt-image-input" accept="image/*">
+          <button id="scan-receipt-btn"><i class="fa-solid fa-magnifying-glass"></i> Scan Receipt</button>
+        </div>
         <p id="ocr-status"></p>
-        <textarea id="ocr-output" readonly style="display: none;"></textarea>
-        <div id="extracted-details" style="display: none;">
-          <p>Auto-Extracted Info:</p>
+        <textarea id="ocr-output" readonly style="display:none;" rows="4"></textarea>
+        <div id="extracted-details">
+          <p>✨ Auto-Extracted Info:</p>
           <p>Amount: <span id="extracted-amount">-</span></p>
           <p>Date: <span id="extracted-date">-</span></p>
-          <button id="use-extracted-btn">Use This</button>
+          <button id="use-extracted-btn"><i class="fa-solid fa-wand-magic-sparkles"></i> Use This Data</button>
         </div>
       </div>
+
+      <!-- Ledger Summary -->
       <div id="ledger-summary" class="ledger-summary"></div>
-      <table id="ledger-table">
-        <thead>
-          <tr><th>Date</th><th>Description</th><th>Type</th><th>Amount</th></tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </section>
 
-    <section id="upi" class="page">
-      <h2>UPI Payments (Mock)</h2>
-      <form id="upi-form">
-        <input type="text" id="upi-desc" placeholder="Description" required>
-        <input type="number" id="upi-amount" placeholder="Amount" step="0.01" required>
-        <input type="date" id="upi-date" required>
-        <button type="submit">Add UPI Payment</button>
-      </form>
-      <table id="upi-table">
-        <thead>
-          <tr><th>Date</th><th>Description</th><th>Amount</th></tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </section>
-
-    <section id="loans" class="page">
-      <h2>Micro-Loan Access</h2>
-      <p>Explore government-backed loan schemes and see tips to build your credit profile.</p>
-      <div class="credit-info">
-        <h3>Build Your Credit Score</h3>
-        <p>Consistently track your income and expenses in the ledger to create a digital trail. This record helps you build a credit profile and get better access to future loans!</p>
+      <!-- Ledger Table -->
+      <div class="table-wrapper">
+        <table id="ledger-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Type</th>
+              <th>Amount (₹)</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
       </div>
+    </section>
+
+    <!-- UPI -->
+    <section id="upi" class="page">
+      <div class="section-header">
+        <div class="section-icon">📱</div>
+        <h2>UPI Payments <span style="font-size:0.7rem; background:rgba(79,142,247,0.15); color:#4f8ef7; padding:0.2rem 0.6rem; border-radius:999px; vertical-align:middle;">Mock</span></h2>
+      </div>
+
+      <form id="upi-form">
+        <input type="text"   id="upi-desc"   placeholder="Payment description" required>
+        <input type="number" id="upi-amount" placeholder="Amount (₹)" step="0.01" required>
+        <input type="date"   id="upi-date"   required>
+        <button type="submit"><i class="fa-solid fa-paper-plane"></i> Add Payment</button>
+      </form>
+
+      <div class="table-wrapper">
+        <table id="upi-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Amount (₹)</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- LOANS -->
+    <section id="loans" class="page">
+      <div class="section-header">
+        <div class="section-icon">💸</div>
+        <h2>Micro-Loan Access</h2>
+      </div>
+
+      <div class="credit-info">
+        <div>
+          <h3>Build Your Credit Profile</h3>
+          <p>Consistently track your income and expenses in the ledger to create a digital financial trail. This record helps you build a credit profile and unlock better loan access in the future!</p>
+        </div>
+      </div>
+
       <div id="loans-list" class="loans-grid"></div>
     </section>
 
+    <!-- LEARN -->
     <section id="learn" class="page">
-      <h2>Financial Literacy Zone</h2>
+      <div class="section-header">
+        <div class="section-icon">📚</div>
+        <h2>Financial Literacy Zone</h2>
+      </div>
+      <p style="margin-bottom:1.5rem; color:var(--text-secondary);">Download our curated learning modules and level up your financial skills.</p>
       <div id="modules-list" class="modules-grid"></div>
     </section>
+
   </main>
 
-  <footer>© 2025 StreetWealth — Made for India's street food heroes.</footer>
+  <footer>
+    © 2025 StreetWealth — Made with ❤️ for India's street food heroes.
+  </footer>
 
-  <div id="chatbot-bubble" onclick="toggleChatbotPopup()">💬</div>
+  <!-- ── Chatbot ── -->
+  <div id="chatbot-bubble" onclick="toggleChatbotPopup()" title="Chat with StreetWealth Assistant">💬</div>
+
   <div id="chatbot-popup">
     <div class="chat-header">
-      StreetWealth Chat
+      <span><i class="fa-solid fa-robot"></i> StreetWealth Assistant</span>
       <button onclick="toggleChatbotPopup()">&times;</button>
     </div>
     <div id="chatbot-messages" class="chat-messages"></div>
     <form id="chatbot-form">
-      <input type="text" id="chatbot-input" placeholder="Type your question...">
+      <input type="text" id="chatbot-input" placeholder="Ask about loans, ledger, UPI…" autocomplete="off">
       <button type="submit">→</button>
     </form>
   </div>

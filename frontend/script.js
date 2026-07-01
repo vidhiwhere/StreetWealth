@@ -1,5 +1,38 @@
+// ── Toast Notification ──
+function showToast(message, type = 'success') {
+  let container = document.getElementById('toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toast-container';
+    container.style.cssText = `
+      position:fixed; top:80px; right:20px; z-index:99999;
+      display:flex; flex-direction:column; gap:0.5rem;
+    `;
+    document.body.appendChild(container);
+  }
+  const toast = document.createElement('div');
+  const colors = { success: '#00e5a0', error: '#f87171', info: '#4f8ef7' };
+  toast.style.cssText = `
+    background:#0e1e33; border:1px solid ${colors[type] || colors.success}33;
+    color:#f0f4ff; padding:0.85rem 1.2rem; border-radius:12px;
+    font-family:'Inter',sans-serif; font-size:0.9rem; font-weight:500;
+    box-shadow:0 8px 32px rgba(0,0,0,0.4);
+    border-left:3px solid ${colors[type] || colors.success};
+    animation:toastIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    max-width:300px;
+  `;
+  if (!document.getElementById('toast-keyframes')) {
+    const s = document.createElement('style');
+    s.id = 'toast-keyframes';
+    s.textContent = '@keyframes toastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}';
+    document.head.appendChild(s);
+  }
+  toast.textContent = message;
+  container.appendChild(toast);
+  setTimeout(() => { toast.style.opacity='0'; toast.style.transition='opacity 0.3s'; setTimeout(()=>toast.remove(), 300); }, 3000);
+}
+
 // Dummy Data for Loans and Literacy Modules
-// ... (Keep all previous code up to LOANS array)
 
 const LOANS = [
   {
@@ -62,9 +95,11 @@ function showPage(pageId) {
     document.getElementById(pageId).classList.add('active');
   }
   document.querySelectorAll('.nav-link').forEach(i => i.classList.remove('active'));
-  let navSelector = { home: 0, ledger: 1, loans: 2, learn: 3 };
-  if (navSelector[pageId] !== undefined)
-    document.querySelectorAll('.nav-link')[navSelector[pageId]].classList.add('active');
+  const navMap = { home: 'nav-home', ledger: 'nav-ledger', loans: 'nav-loans', learn: 'nav-learn' };
+  if (navMap[pageId]) {
+    const el = document.getElementById(navMap[pageId]);
+    if (el) el.classList.add('active');
+  }
 }
 showPage('home');
 
@@ -86,10 +121,11 @@ async function renderLedger() {
     if (e.type === 'income') totalIncome += e.amount;
     else totalExpense += e.amount;
   });
+  const balance = totalIncome - totalExpense;
   document.getElementById('ledger-summary').innerHTML = `
-    <span><b>Total Income:</b> ₹${totalIncome.toFixed(2)}</span>
-    <span><b>Expenses:</b> ₹${totalExpense.toFixed(2)}</span>
-    <span><b>Balance:</b> ₹${(totalIncome - totalExpense).toFixed(2)}</span>
+    <span>Total Income<b>₹${totalIncome.toFixed(2)}</b></span>
+    <span>Total Expenses<b>₹${totalExpense.toFixed(2)}</b></span>
+    <span>Net Balance<b>₹${balance.toFixed(2)}</b></span>
   `;
 }
 
@@ -409,12 +445,17 @@ const FAQS = [
   }
 ];
 
+let chatbotOpened = false;
 function toggleChatbotPopup() {
   const pop = document.getElementById('chatbot-popup');
   pop.classList.toggle('open');
   if (pop.classList.contains('open')) {
     setTimeout(() => {
       document.getElementById('chatbot-input').focus();
+      if (!chatbotOpened) {
+        chatbotOpened = true;
+        addChatBubble('Namaste! 🙏 I am your StreetWealth assistant. Ask me about <b>loans, ledger, UPI payments,</b> or <b>financial tips</b>!', 'bot');
+      }
     }, 200);
   }
 }
@@ -545,7 +586,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector("#ledger-table tbody").innerHTML = '';
     document.querySelector("#upi-table tbody").innerHTML = '';
     document.getElementById('ledger-summary').innerHTML = '';
-    alert('You have successfully logged out.');
+    showToast('You have been logged out successfully.');
   };
 
   function updateAuthButtons() {
