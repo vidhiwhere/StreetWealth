@@ -5,8 +5,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const app = express();
-const port = 4000;
-const JWT_SECRET = 'streetwealth-secret-2025'; // Replace with env variable in production
+const port = process.env.PORT || 4000;
+const JWT_SECRET = process.env.JWT_SECRET || 'streetwealth-secret-2025';
 
 // Middleware
 app.use(cors());

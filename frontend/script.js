@@ -133,7 +133,7 @@ async function fetchLedgerEntries() {
   const token = localStorage.getItem('token');
   if (!token) return [];
   try {
-    const res = await fetch('http://localhost:4000/api/ledger/my-entries', {
+    const res = await fetch('/api/ledger/my-entries', {
       headers: { 'Authorization': 'Bearer ' + token }
     });
     if (!res.ok) throw new Error('Failed to fetch entries');
@@ -157,7 +157,7 @@ document.getElementById('ledger-form').addEventListener('submit', async function
   const type = document.getElementById('type').value;
   if (amount > 0 && desc && date) {
     try {
-      const res = await fetch('http://localhost:4000/api/ledger/entries', {
+      const res = await fetch('/api/ledger/entries', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -239,7 +239,7 @@ async function fetchUPIEntries() {
   const token = localStorage.getItem('token');
   if (!token) return [];
   try {
-    const res = await fetch('http://localhost:4000/api/upi/my-entries', {
+    const res = await fetch('/api/upi/my-entries', {
       headers: { 'Authorization': 'Bearer ' + token }
     });
     if (!res.ok) throw new Error('Failed to fetch UPI entries');
@@ -262,7 +262,7 @@ document.getElementById('upi-form').addEventListener('submit', async function(e)
   const date = document.getElementById('upi-date').value;
   if (amount > 0 && desc && date) {
     try {
-      const res = await fetch('http://localhost:4000/api/upi/entries', {
+      const res = await fetch('/api/upi/entries', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -352,7 +352,7 @@ scanBtn.addEventListener('click', function() {
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          await fetch('http://localhost:4000/api/receipts', {
+          await fetch('/api/receipts', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -522,7 +522,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const email = document.getElementById('login-email').value.trim();
     const password = document.getElementById('login-password').value.trim();
     try {
-      const res = await fetch('http://localhost:4000/api/auth/login', {
+      const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -554,7 +554,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const email = document.getElementById('signup-email').value.trim();
     const password = document.getElementById('signup-password').value.trim();
     try {
-      const res = await fetch('http://localhost:4000/api/auth/register', {
+      const res = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password })
